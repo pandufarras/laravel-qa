@@ -17,9 +17,25 @@
                                     <a title="This ansers is not useful" class="vote-down off">
                                             <i class="fas fa-caret-down fa-3x"></i>
                                     </a>
-                                    <a titel="Mark this answer as best answer (Click again to undo)" class="{{ $answer->status }} mt-2">
-                                            <i class="fas fa-check fa-2x"></i>
-                                    </a>
+                                    @can ('accept', $answer)
+                                        <a titel="Mark this answer as best answer (Click again to undo)"
+                                                class="{{ $answer->status }} mt-2"
+                                                onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();"
+                                                >
+                                                <i class="fas fa-check fa-2x"></i>
+                                        </a>
+                                        <form id="accept-answer-{{ $answer->id}}" action="{{ route('answers.accept', $answer->id)}}" method="POST" style="display:none;">
+                                            @csrf
+                                        </form>
+                                    @else
+                                        @if ($answer->is_best)
+                                        <a titel="The question owner accepted this answer as best answer"
+                                        class="{{ $answer->status }} mt-2"
+                                         >
+                                        <i class="fas fa-check fa-2x"></i>
+                                        </a>
+                                        @endif
+                                    @endcan
                                 </div>
                         <div class="media-body">
                             {!! $answer->body_html !!}
