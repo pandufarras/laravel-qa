@@ -48,10 +48,11 @@ form.form-delete {
 }
 
 .vote-controls {
-    min-with: 60px;
+    min-width: 60px;
     margin-right: 30px;
     text-align: center;
     color: $gray-700;
+
 
     span, a {
         display: block;
@@ -74,7 +75,7 @@ form.form-delete {
         color: $gray-500;
     }
     &.favorite {
-        &.favorite, &.favorited:hover {
+        &.favorited, &.favorited:hover {
             color: $warning;
             }
         }
